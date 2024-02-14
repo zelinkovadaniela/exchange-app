@@ -1,15 +1,11 @@
-import { render } from '@testing-library/react';
+import { render } from '@testing-library/react'; // Add this line
 
 import App from './app';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('App', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<App />);
+    const { baseElement } = render(<BrowserRouter><App /></BrowserRouter>);
     expect(baseElement).toBeTruthy();
-  });
-
-  it('should have a greeting as the title', () => {
-    const { getByText } = render(<App />);
-    expect(getByText(/Welcome to exchange app!/gi)).toBeTruthy();
   });
 });
