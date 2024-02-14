@@ -1,0 +1,8 @@
+{
+  "name": "rates",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "app/rates/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {}
+}
