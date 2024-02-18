@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ExchangeRates, ExchangeRateDetail, ExchangeRateType } from './exchangeRates/src';
+import { ExchangeRates, ExchangeRateDetail, ExchangeRateType } from '@exchange-app/exchangeRates';
 import axios from 'axios';
 
 export const App = () => {
