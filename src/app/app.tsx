@@ -9,7 +9,6 @@ import axios from 'axios';
 import { Stack } from '@mui/material';
 
 export const App = () => {
-  const apiKey = 'c52a0682-4806-4903-828f-6cc66508329e';
   const [rates, setRates] = useState<ExchangeRateType[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +20,7 @@ export const App = () => {
   const fetchRates = async () => {
     try {
       const response = await axios.get(
-        `https://webapi.developers.erstegroup.com/api/csas/public/sandbox/v2/rates/exchangerates?web-api-key=${apiKey}`
+        `http://localhost:8080/api/exchange`
       );
       setRates(response.data);
       setLoading(false);
