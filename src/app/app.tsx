@@ -6,11 +6,11 @@ import {
   ExchangeRateType,
 } from '@exchange-app/exchangeRates';
 import axios from 'axios';
-import { Stack } from '@mui/material';
 
 export const App = () => {
   const [rates, setRates] = useState<ExchangeRateType[]>([]);
   const [loading, setLoading] = useState(true);
+  const baseApiUrl = 'http://localhost:8080/api/exchange';
 
   useEffect(() => {
     console.log('App mounted');
@@ -19,9 +19,11 @@ export const App = () => {
 
   const fetchRates = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/exchange`
-      );
+      let response = await axios.get(`${baseApiUrl}?usedb=1`);
+      
+      if (!response?.data?.length){
+        response = await axios.get(`${baseApiUrl}?usedb=0`);
+      }
       setRates(response.data);
       setLoading(false);
     } catch (error) {
@@ -34,20 +36,10 @@ export const App = () => {
   }
 
   return (
-    <Stack
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        maxWidth: 1018,
-        margin: '0 auto 36px',
-      }}
-    >
-      <Routes>
-        <Route path="/:code" element={<ExchangeRateDetail rates={rates} />} />
-        <Route path="/" element={<ExchangeRates rates={rates} />} />
-      </Routes>
-    </Stack>
+    <Routes>
+      <Route path="/:code" element={<ExchangeRateDetail rates={rates} />} />
+      <Route path="/" element={<ExchangeRates rates={rates} />} />
+    </Routes>
   );
 };
 
